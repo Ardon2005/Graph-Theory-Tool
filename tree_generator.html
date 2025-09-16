@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gjeneruesi i Pemëve - Teoria e Grafeve</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/tree_generator.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/graphViz.css" />
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    
+</head>
+<body>
+     <header id="header">
+                <h1><a href="index.html"><img src="logo1.png" alt="" class="logo"> Teoria e Grafeve</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li class="special">
+                            <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                            <div id="menu">
+                                <ul>
+                                    <li><a href="index.html"><i class="fa solid fa-home"></i> Ballina</a></li>
+                                    <li><a href="generic.html"><i class="fa solid fa-circle-nodes"></i> Vizualizo Grafin</a></li>
+                                    <li><a href="elements.html"><i class="fa solid fa-book"></i> Leksionet</a></li>
+                                    <li><a href="aboutus.html"><i class="fa solid fa-people-group"></i> Rreth Nesh</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+    <div class="back-button-container">
+        <button class="back-button" onclick="window.location.href='generic.html'" title="Kthehu Prapa">
+            <i class="fa-solid fa-arrow-left"></i> Kthehu
+        </button>
+    </div>
+
+    <article id="main">
+
+    <header>
+        <canvas id="spectral-lecture-canvas"></canvas>
+        <p>Ketu eshte faqja per gjenerimin e pemeve</p>
+    </header>
+    <section class="wrapper style5">
+    <div class="treeViz-workspace">
+        <div class="treeViz-top-toolbar">
+            <div class="toolbar-content-wrapper">
+                <div class="toolbar-content active">
+                    <div class="toolbar-group">
+                        <span class="group-label">Parametrat e Pemës:</span>
+                        <label for="nodeCount" style="margin-bottom: -0.1em;">Numri i Nyjeve:</label>
+                        <input type="number" id="nodeCount" min="0" value="0" style="width: 60px;" />
+                        <label for="treeType"  style="margin-bottom: -0.1em;">Lloji i Pemës:</label>
+                        <select id="treeType" style="font-size: 12px;">
+                            <option value="binary">Pemë Binare</option>
+                            <option value="balanced">Pemë e Balancuar</option>
+                            <option value="star">Pemë Yll</option>
+                            <option value="random">Pemë e Rastësishme</option>
+                        </select>
+                    </div>
+                    <div class="toolbar-group">
+                        <button id="treeViz-clearBtn" title="Pastro"><i class="fa-solid fa-trash"></i></button>
+                        <button id="treeViz-resetZoomBtn" title="Rivendos Zmadhimin"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="treeViz-content-area">
+            <div class="treeViz-tree-panel">
+                <div id="treeViz-treeContainer" class="tree-container-single"></div>
+            </div>
+            <div class="treeViz-info-panel">
+                <h3>Informacione për Pemën</h3>
+                <table id="treeInfoTable">
+                    <tr><td>Numri i Nyjeve</td><td id="nodeCountInfo">0</td></tr>
+                    <tr><td>Numri i Lidhjeve</td><td id="edgeCountInfo">0</td></tr>
+                    <tr><td>Lartësia e Pemës</td><td id="heightInfo">0</td></tr>
+                    <tr><td>Lloji i Pemës</td><td id="typeInfo">-</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </section>
+</article>
+<footer id="footer">
+    <div class="footer-container">
+        <div class="footer-section developers-block">
+            <h4>Zhvilluesit</h4>
+            <div class="names-list">
+                <span class="name">Arb Hajdini</span>
+                <span class="separator">|</span>
+                <span class="name">Ardon Qerimi</span>
+                <span class="separator">|</span>
+                <span class="name">Dion Bejtullahu</span>
+            </div>
+        </div>
+        <div class="footer-section icons-block">
+            <h4></h4>
+            <ul class="icons">
+                <li><a href="https://www.facebook.com/universitetikadrizekauniversity" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+                <li><a href="https://www.linkedin.com/school/universiteti-publik-kadri-zeka-gjilan/posts/?feedView=all" target="_blank" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+                <li><a href="https://uni-gjilan.net/" class="icon solid fa-globe" target="_blank"><span class="label">UKZ</span></a></li>
+                <li><a href="https://e-learning.uni-gjilan.net/course/view.php?id=21" class="icon solid fa-book" target="_blank"><span class="label">UKZ</span></a></li>
+                <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=jrjtXLDFLKmjmFCSQsLKNvzCBjXksfCwQqsfwznbzrXtwNlSZtDcnvkGQTrVxClzSbKhnsnF" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+        <div class="footer-section lecturer-block">
+            <h4>Leksionet</h4>
+            <div class="names-list">
+                <span class="name">Prof. Dr. Ekrem Alimi</span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <ul>
+            <li>© 2025 Teoria e Grafeve. Të gjitha të drejtat e rezervuara</li>
+            <span class="separator">|</span><li>Dizajni: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <script src="assets/js/tree_generator.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/graphViz.js"></script>
+    <script src="assets/js/canvasbg.js"></script>
+    
+</body>
+</html>
