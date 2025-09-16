@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Elements - Spectral by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="../index.html"><img src="../logo1.png" alt="" class="logo"> Teoria e Grafeve</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="../index.html"><i class="fa solid fa-home"></i> Ballina</a></li>
+									<li><a href="../generic.html"><i class="fa solid fa-circle-nodes"></i> Vizualizo Grafin</a></li>
+									<li><a href="../elements.html"><i class="fa solid fa-book"></i> Leksionet</a></li>
+									<li><a href="../aboutus.html"><i class="fa solid fa-people-group"></i> Rreth Nesh</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Main -->
+			<article id="main">
+				<header>
+					<canvas id="spectral-lecture-canvas"></canvas>
+					<h2>Leksioni 6</h2>
+					<p>Veprimet me grafe</p>
+				</header>
+				<section class="wrapper style5">
+					<div class="inner">
+						<div id="lecture-nav">
+							<a href="leksioni5.html" class="button " ><i class="fas fa-arrow-left"></i> Leksioni Paraprak</a>
+							<a href="leksioni7.html" class="button" >Leksioni në Vijim <i class="fas fa-arrow-right"></i></a>
+						</div>
+						<canvas id="pdfViewer"></canvas>
+						<div id="pdf-controls">
+							<button id="prev" class="button"><i class="fas fa-arrow-left"></i> Prapa</button>
+							<span id="pageInfo"></span>
+							<button id="next" class="button">Para <i class="fas fa-arrow-right"></i></button>
+							<button id="fullscreen" class="button"><i class="fas fa-expand"></i> Fullscreen</button>
+						</div>
+					</div>
+				</section>
+			</article>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="footer-container">
+					<div class="footer-section developers-block">
+						<h4>Zhvilluesit</h4>
+						<div class="names-list">
+							<span class="name">Arb Hajdini</span>
+							<span class="separator">|</span>
+							<span class="name">Ardon Qerimi</span>
+							<span class="separator">|</span>
+							<span class="name">Dion Bejtullahu</span>
+						</div>
+					</div>
+					
+					<div class="footer-section icons-block">
+						<h4></h4>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/universitetikadrizekauniversity" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.linkedin.com/school/universiteti-publik-kadri-zeka-gjilan/posts/?feedView=all" target="_blank" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://uni-gjilan.net/" class="icon solid fa-globe" target="_blank"><span class="label">UKZ</span></a></li>
+							<li><a href="https://e-learning.uni-gjilan.net/course/view.php?id=21" class="icon solid fa-book" target="_blank"><span class="label">UKZ</span></a></li>
+							<li><a href="https://mail.google.com/mail/u/0/#inbox?compose=jrjtXLDFLKmjmFCSQsLKNvzCBjXksfCwQqsfwznbzrXtwNlSZtDcnvkGQTrVxClzSbKhnsnF" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</div>
+					
+					<div class="footer-section lecturer-block">
+						<h4>Leksionet</h4>
+						<div class="names-list">
+							<span class="name">Prof. Dr. Ekrem Alimi</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="copyright">
+					<ul>
+						<li>© 2025 Teoria e Grafeve. Të gjitha të drejtat e rezervuara</li>
+						<span class="separator">|</span><li>Dizajni: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/jquery.scrollex.min.js"></script>
+		<script src="../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+		<script src="../assets/js/canvasbg.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+		<script>
+			// PDF Viewer Logic
+			const url = '../pdfs/Leksion 6.pdf'; // Rruga e përditësuar për PDF-në e Leksionit 5
+			let pdfDoc = null,
+				pageNum = 1,
+				pageRendering = false,
+				pageNumPending = null,
+				scale = 1.5,
+				canvas = document.getElementById('pdfViewer'),
+				ctx = canvas.getContext('2d');
+
+			// Funksioni për të shfaqur faqen
+			function renderPage(num) {
+				pageRendering = true;
+				pdfDoc.getPage(num).then(page => {
+					const viewport = page.getViewport({ scale: scale });
+					canvas.height = viewport.height;
+					canvas.width = viewport.width;
+
+					const renderContext = {
+						canvasContext: ctx,
+						viewport: viewport
+					};
+					let renderTask = page.render(renderContext);
+					renderTask.promise.then(() => {
+						pageRendering = false;
+						if (pageNumPending !== null) {
+							renderPage(pageNumPending);
+							pageNumPending = null;
+						}
+					});
+				});
+				document.getElementById('pageInfo').textContent = `Faqe ${num} nga ${pdfDoc.numPages}`;
+			}
+
+			// Ngarko PDF-në
+			pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+				pdfDoc = pdfDoc_;
+				renderPage(pageNum);
+			}).catch(error => {
+				console.error('Gabim gjatë ngarkimit të PDF-së:', error);
+			});
+
+			// Kontrollet
+			document.getElementById('prev').addEventListener('click', () => {
+				if (pageNum <= 1) return;
+				pageNum--;
+				renderPage(pageNum);
+			});
+
+			document.getElementById('next').addEventListener('click', () => {
+				if (pageNum >= pdfDoc.numPages) return;
+				pageNum++;
+				renderPage(pageNum);
+			});
+
+			document.getElementById('fullscreen').addEventListener('click', () => {
+				if (canvas.requestFullscreen) {
+					canvas.requestFullscreen();
+				}
+			});
+
+			// Shigjetat në tastierë
+			document.addEventListener('keydown', (e) => {
+				if (document.fullscreenElement) {
+					if (e.key === 'ArrowLeft' && pageNum > 1) {
+						pageNum--;
+						renderPage(pageNum);
+					} else if (e.key === 'ArrowRight' && pageNum < pdfDoc.numPages) {
+						pageNum++;
+						renderPage(pageNum);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

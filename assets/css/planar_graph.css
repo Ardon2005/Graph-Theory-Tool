@@ -1,0 +1,498 @@
+.graphViz-workspace {
+    min-height: 75vh;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Rritur për të shfrytëzuar ekrane më të mëdha */
+    margin: 4em auto;
+    box-sizing: border-box; /* Shtuar për menaxhim konsistent të padding dhe width */
+}
+.logo{
+	position: relative;
+	width: 10%;
+	top: 10px;
+}
+.graphViz-content-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 18px;
+}
+
+.graphViz-graph-panel {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    padding: 13px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.graph-container-single {
+    width: 100%;
+    height: 475px;
+    background: #ffffff;
+    border: 1px solid #dfe4ea;
+    border-radius: 6px;
+    background-image: 
+        linear-gradient(to right, #dfe4ea 1px, transparent 1px),
+        linear-gradient(to bottom, #dfe4ea 1px, transparent 1px);
+    background-size: 18px 18px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.graphViz-analysis-panel {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 18px;
+}
+
+.graphViz-analysis-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.graphViz-analysis-panel h3 {
+    text-align: left;
+    color: #2e3842;
+    margin-bottom: 11px;
+    font-size: 1.1em;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.graphViz-analysis-panel h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #2e3842;
+}
+
+.graphViz-analysis-panel th {
+    background: transparent;
+    color: #2e3842;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    padding: 9px 13px;
+    border-bottom: 1px solid #dfdfdf;
+    text-align: left;
+}
+
+.graphViz-analysis-panel td {
+    padding: 9px 13px;
+    color: #4E4852;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 0.85em;
+    transition: background 0.3s ease;
+}
+
+.graphViz-analysis-panel tr:nth-child(even) td {
+    background: rgba(0, 0, 0, 0.0375);
+}
+
+.graphViz-analysis-panel tr:hover td {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.graphViz-top-toolbar {
+    background: #f8f9fa;
+    width: 100%;
+    max-width: 1200px; /* Rritur për të përputhur me workspace */
+    margin: -4.5em auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+    border-radius: 4px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.toolbar-tabs {
+    display: flex;
+    background: #e9ecef;
+    border-bottom: 1px solid #ced4da;
+    padding: 5px 10px;
+}
+
+.tab-btn {
+    padding: 8px 20px;
+    background: #e9ecef;
+    border: none;
+    border-right: 1px solid #ced4da;
+    cursor: pointer;
+    font-size: 14px;
+    color: #495057;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    background: #dee2e6;
+}
+
+.tab-btn.active {
+    background: #ffffff;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+.toolbar-content-wrapper {
+    background: #ffffff;
+    padding: 10px 15px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.toolbar-content {
+    display: none;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.toolbar-content.active {
+    display: flex;
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-right: 1px solid #e9ecef;
+    padding-right: 20px;
+}
+
+.toolbar-group:last-child {
+    border-right: none;
+}
+
+.group-label {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.toolbar-content button {
+    padding: 0;
+    width: 34px;
+    min-width: 34px;
+    max-width: 34px;
+    height: 34px;
+    background-color: #ffffff;
+    color: #495057;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-content button:hover {
+    background: #e9ecef;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.toolbar-content button:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-content select {
+    padding: 6px 20px 6px 6px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+    background: #ffffff;
+    color: #495057;
+    transition: all 0.3s ease;
+    height: 34px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgMTAgNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSAxbDUgNC41TDkgMSIgc3Ryb2tlPSIjMDA3YmZmIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvc3ZnPg==');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 8px 4px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.toolbar-content select:hover {
+    border-color: #007bff;
+    background: #e9ecef;
+}
+
+.toolbar-content select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.graphViz-left-toolbar {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    z-index: 20;
+}
+
+.graphViz-left-toolbar button {
+    padding: 0;
+    width: 34px;
+    height: 34px;
+    background-color: #fff;
+    color: #2c3e50;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 4px;
+}
+
+.graphViz-left-toolbar button:hover {
+    background: linear-gradient(70deg, #2e3842, #2e3842);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.graphViz-left-toolbar button:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.graphViz-customPopup {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.graphViz-customPopup.graphViz-show {
+    opacity: 1;
+}
+
+.graphViz-customPopup.graphViz-planar {
+    background-color: #27ae60; /* Gjelbër për graf planar */
+}
+
+.graphViz-customPopup.graphViz-non-planar {
+    background-color: #e74c3c; /* Kuq për graf jo planar */
+}
+
+.back-button-container {
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-button {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #055ea3;
+    color: #ffffff;
+}
+
+/* Media query për ekrane të mesme (si ThinkPad Yoga 370) */
+@media screen and (max-width: 1366px) {
+    .graphViz-workspace {
+        min-height: 60vh;
+        padding: 12px;
+        max-width: 900px;
+        margin: 3.5em auto;
+    }
+
+    .graphViz-content-area {
+        gap: 15px;
+    }
+
+    .graphViz-graph-panel {
+        padding: 10px;
+    }
+
+    .graph-container-single {
+        height: 375px;
+        background-size: 15px 15px;
+    }
+
+    .graphViz-top-toolbar {
+        max-width: 900px;
+        margin: -3.5em auto;
+    }
+
+    .tab-btn {
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+
+    .toolbar-content-wrapper {
+        padding: 8px 12px;
+        gap: 15px;
+    }
+
+    .toolbar-content button {
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .toolbar-content select {
+        padding: 4px 15px 4px 4px;
+        font-size: 12px;
+        height: 30px;
+        background-position: right 4px center;
+        background-size: 6px 3px;
+    }
+
+    .graphViz-left-toolbar {
+        top: 15px;
+        left: 15px;
+        gap: 4px;
+    }
+
+    .graphViz-left-toolbar button {
+        width: 27px;
+        height: 27px;
+        font-size: 12px;
+    }
+
+    .back-button {
+        font-size: 11px;
+        padding: 8px 12px;
+    }
+}
+
+/* Media query për ekrane të mëdha (1440p, 4K, laptopë 15"-16") */
+@media screen and (min-width: 1440px) {
+    .graphViz-workspace {
+        max-width: 1400px; /* Më shumë hapësirë për ekrane të mëdha */
+        padding: 16px;
+        margin: 5em auto;
+    }
+
+    .graphViz-top-toolbar {
+        max-width: 1400px;
+        margin: -5em auto;
+    }
+
+    .graph-container-single {
+        height: 550px; /* Më i madh për të shfrytëzuar hapësirën */
+        background-size: 20px 20px; /* Grid më i madh për lexueshmëri */
+    }
+
+    .graphViz-graph-panel {
+        padding: 16px;
+    }
+
+    .graphViz-analysis-panel {
+        padding: 20px;
+    }
+
+    .graphViz-analysis-panel h3 {
+        font-size: 1.2em;
+    }
+
+    .graphViz-analysis-panel th {
+        font-size: 0.9em;
+        padding: 11px 15px;
+    }
+
+    .graphViz-analysis-panel td {
+        font-size: 0.95em;
+        padding: 11px 15px;
+    }
+
+    .toolbar-tabs {
+        padding: 6px 12px;
+    }
+
+    .tab-btn {
+        padding: 10px 24px;
+        font-size: 15px;
+    }
+
+    .toolbar-content-wrapper {
+        padding: 12px 18px;
+        gap: 25px;
+    }
+
+    .toolbar-content button {
+        width: 38px;
+        min-width: 38px;
+        max-width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .toolbar-content select {
+        padding: 8px 24px 8px 8px;
+        font-size: 15px;
+        height: 38px;
+        background-size: 10px 5px;
+        background-position: right 6px center;
+    }
+
+    .graphViz-left-toolbar {
+        top: 20px;
+        left: 20px;
+        gap: 6px;
+    }
+
+    .graphViz-left-toolbar button {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .graphViz-customPopup {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 12px 18px;
+    }
+}

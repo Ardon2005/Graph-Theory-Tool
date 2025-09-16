@@ -1,0 +1,42 @@
+.developer-section {
+				display: flex;
+				flex-wrap: wrap;
+                gap: 2em;
+				justify-content: space-between;
+			}
+			.developer-card {
+				text-align: center;
+                box-shadow: 5px 5px 10px 10px #666;
+				max-width: 300px;
+                padding: 20px;
+                display: flex; 
+				flex-direction: column; 
+                align-items: center;
+				min-height: 300px;
+			}
+			.developer-card img {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				object-fit: cover;
+				margin-bottom: 1em;
+			}
+			.developer-card h3 {
+				margin: 0.5em 0;
+			}
+			.developer-card p {
+				color: #666;
+			}
+            .paragraph{
+                display: none;
+            }
+            .seemore {
+                background-color: #d6d6d6;
+                color: #ffffff;
+				margin-top: auto; 
+				width: 100%; 
+			}
+            .paragraph a {
+                color: rgb(0, 89, 255);
+                text-decoration: none;
+            }
