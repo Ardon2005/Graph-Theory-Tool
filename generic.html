@@ -1,0 +1,297 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Faqja për vizualizim të grafeve</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/graphViz.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <header id="header">
+                <h1><a href="index.html"><img src="logo1.png" alt="" class="logo"> Teoria e Grafeve</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li class="special">
+                            <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                            <div id="menu">
+                                <ul>
+                                    <li><a href="index.html"><i class="fa solid fa-home"></i> Ballina</a></li>
+                                    <li><a href="generic.html"><i class="fa solid fa-circle-nodes"></i> Vizualizo Grafin</a></li>
+                                    <li><a href="elements.html"><i class="fa solid fa-book"></i> Leksionet</a></li>
+                                    <li><a href="aboutus.html"><i class="fa solid fa-people-group"></i> Rreth Nesh</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <article id="main">
+                <header>
+                    <canvas id="spectral-lecture-canvas"></canvas>
+                    <h2>Faqja për Gjenerimin e Grafit</h2>
+                    <p>Ketu gjenden faqja per gjenerimin e grafeve</p>
+                </header>
+                <section class="wrapper style5">
+                    <div class="graphViz-top-toolbar">
+                        <div class="toolbar-tabs">
+                            <button class="tab-btn" data-tab="file-tab">File</button>
+                            <button class="tab-btn active" data-tab="home-tab">Funksionet Bazike</button>
+                            <button class="tab-btn" data-tab="matrica-tab">Matrica</button>
+                            <button class="tab-btn" data-tab="rruga-tab">Rruga</button>
+                            <button class="tab-btn" data-tab="izo-tab">Izomorfizmi</button>
+                            <button class="tab-btn" data-tab="pemet-tab" onclick="window.location.href='tree_generator.html'">Pemët</button>
+                            <button class="tab-btn" data-tab="pemet-tab" onclick="window.location.href='planar_graph.html'">Grafi Planar</button>
+                        </div>
+                        <div class="toolbar-content-wrapper">
+                            <div class="toolbar-content active" id="home-tab">
+                                <div class="toolbar-group">
+                                    <span class="group-label">Formatimi</span>
+                                    <button id="graphViz-toggleLabelBtn" title="Ndrysho Pozicionin e Etiketave"><i class="fa-solid fa-font"></i></button>
+                                    <div class="color-picker-wrapper">
+                                        <input type="color" id="graphViz-nodeColorPicker" style="display: none;" value="#2B7CE9">
+                                        <button class="color-btn" data-color-input="graphViz-nodeColorPicker" title="Ngjyra e Nyjeve"><i class="fa-solid fa-fill-drip"></i></button>
+                                    </div>
+                                    <div class="color-picker-wrapper">
+                                        <input type="color" id="graphViz-edgeColorPicker" style="display: none;" value="#000000">
+                                        <button class="color-btn" data-color-input="graphViz-edgeColorPicker" title="Ngjyra e Lidhjeve"><i class="fa-solid fa-paintbrush"></i></button>
+                                    </div>
+                                </div>
+                                <div class="toolbar-group">
+                                    <span class="group-label">Lidhjet</span>
+                                    <select id="graphViz-edgeType" title="Lloji i Lidhjes">
+                                        <option value="straight">Lidhje e Drejtë</option>
+                                        <option value="curved">Lidhje e Lakuar</option>
+                                    </select>
+                                    <select id="graphViz-edgeOrientation" title="Orientimi i Lidhjes">
+                                        <option value="undirected">Lidhje e Paorientuar</option>
+                                        <option value="directed">Lidhje e Orientuar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="toolbar-content" id="file-tab">
+                                <div class="toolbar-group">
+                                    <span class="group-label">Skedarët</span>
+                                    <button id="graphViz-exportBtn" title="Eksporto Grafin"><i class="fas fa-cloud-download-alt"></i></button>
+                                    <input type="file" id="graphViz-importInput" accept=".json" style="display: none;">
+                                    <button id="graphViz-importBtn" title="Importo Grafin"><i class="fas fa-cloud-upload-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="toolbar-content" id="matrica-tab">
+                                <div class="toolbar-group">
+                                    <span class="group-label">Matrica e Fqinjësisë</span>
+                                    <button id="graphViz-adjacencyMatrixBtn" title="Shfaq Matricën e Fqinjësisë"><i class="fas fa-table"></i></button>
+                                    <button id="graphViz-createFromMatrixBtn" title="Krijo Graf nga Matrica e Fqinjësisë"><i class="fas fa-table-cells"></i></button>
+                                </div>
+                                <div class="toolbar-group">
+                                    <span class="group-label">Matrica e Incidencës</span>
+                                    <button id="graphViz-incidenceMatrixBtn" title="Shfaq Matricën e Incidencës"><i class="fas fa-border-all"></i></button>
+                                    <button id="graphViz-createFromIncidenceBtn" title="Krijo Graf nga Matrica e Incidencës"><i class="fas fa-th"></i></button>
+                                </div>
+                            </div>
+                            <div class="toolbar-content" id="rruga-tab">
+                                <div class="toolbar-group">
+                                    <span class="group-label">Rruga</span>
+                                    <select id="graphViz-startNode" title="Nyja Fillestare"></select>
+                                    <select id="graphViz-endNode" title="Nyja Përfundimtare"></select>
+                                    <button id="graphViz-dijkstraBtn" title="Gjej Shtegun më të Shkurtër"><i class="fas fa-route"></i></button>
+                                </div>
+                            </div>
+                            <div class="toolbar-content" id="izo-tab">
+                                <div class="toolbar-group">
+                                    <button id="graphViz-splitGraphBtn" title="Nda Grafin për Izomorfizëm"><i class="fas fa-columns"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graphViz-workspace">
+                        <div class="graphViz-content-area">
+                            <div class="graphViz-graph-panel">
+                                <div class="graphViz-left-toolbar">
+                                    <button id="graphViz-clearBtn" title="Pastro Grafin"><i class="fas fa-trash-can"></i></button>
+                                    <button id="graphViz-undoBtn" title="Kthe Mbrapa"><i class="fas fa-undo-alt"></i></button>
+                                    <button id="graphViz-redoBtn" title="Përsërit"><i class="fas fa-redo-alt"></i></button>
+                                    <button id="graphViz-resetZoomBtn" title="Kthe Madhësinë Normale"><i class="fas fa-search-plus"></i></button>
+                                </div>
+                                <div id="graphViz-graphContainer" class="graph-container-single"></div>
+                                <div id="graphViz-leftGraphContainer" class="graph-container-split" style="display: none;"></div>
+                                <div id="graphViz-rightGraphContainer" class="graph-container-split" style="display: none;"></div>
+                            </div>
+                            <div class="graphViz-analysis-panel">
+                                <div id="graphViz-graphInfo"></div>
+                                <div id="graphViz-shortestPathInfo"></div>
+                            </div>
+                        </div>
+                        <div id="graphViz-customPopup" class="graphViz-customPopup"></div>
+                    </div>
+                </section>
+            </article>
+            <footer id="footer">
+                <div class="footer-container">
+                    <div class="footer-section developers-block">
+                        <h4>Zhvilluesit</h4>
+                        <div class="names-list">
+                            <span class="name">Arb Hajdini</span>
+                            <span class="separator">|</span>
+                            <span class="name">Ardon Qerimi</span>
+                            <span class="separator">|</span>
+                            <span class="name">Dion Bejtullahu</span>
+                        </div>
+                    </div>
+                    <div class="footer-section icons-block">
+                        <h4></h4>
+                        <ul class="icons">
+                            <li><a href="https://www.facebook.com/universitetikadrizekauniversity" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+                            <li><a href="https://www.linkedin.com/school/universiteti-publik-kadri-zeka-gjilan/posts/?feedView=all" target="_blank" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+                            <li><a href="https://uni-gjilan.net/" class="icon solid fa-globe" target="_blank"><span class="label">UKZ</span></a></li>
+                            <li><a href="https://e-learning.uni-gjilan.net/course/view.php?id=21" class="icon solid fa-book" target="_blank"><span class="label">UKZ</span></a></li>
+                            <li><a href="https://mail.google.com/mail/u/0/#inbox?compose=jrjtXLDFLKmjmFCSQsLKNvzCBjXksfCwQqsfwznbzrXtwNlSZtDcnvkGQTrVxClzSbKhnsnF" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section lecturer-block">
+                        <h4>Ligjërues</h4>
+                        <div class="names-list">
+                            <span class="name">Prof. Dr. Ekrem Alimi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <ul>
+                        <li>© 2025 Teoria e Grafeve. Të gjitha të drejtat e rezervuara</li>
+                        <span class="separator">|</span><li>Dizajni: <a href="http://html5up.net">HTML5 UP</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Popup për Matricën e Fqinjësisë -->
+        <div id="adjacencyPopup" class="graphViz-popup" style="display: none;">
+            <button class="close-btn">×</button>
+            <h3>Matrica e Fqinjësisë</h3>
+            <div class="popup-content">
+                <div class="graph-container" id="adjacencyGraphContainer"></div>
+                <div class="matrix-container">
+                    <table id="adjacencyMatrixTable">
+                        <!-- Tabela e matricës së fqinjësisë popullohet nga JavaScript -->
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup për Matricën e Incidencës -->
+        <div id="incidencePopup" class="graphViz-popup" style="display: none;">
+            <button class="close-btn">×</button>
+            <h3>Matrica e Incidencës</h3>
+            <div class="popup-content">
+                <div class="graph-container" id="incidenceGraphContainer"></div>
+                <div class="matrix-container">
+                    <table id="incidenceMatrixTable">
+                        <!-- Tabela e matricës së incidencës popullohet nga JavaScript -->
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup për Graf nga Matrica e Fqinjësisë -->
+        <div id="matrixInputPopup" class="graphViz-popup" style="display: none;">
+            <button class="close-btn">×</button>
+            <h3>Krijo Graf nga Matrica e Fqinjësisë</h3>
+            <div class="popup-content">
+                <div class="graph-container" id="matrixGraphPreview"></div>
+                <div class="matrix-container">
+                    <div class="matrix-controls">
+                        <label for="matrixSize">Numri i nyjeve:</label>
+                        <input type="number" id="matrixSize" min="1" max="26" value="5">
+                        <button id="updateMatrixSizeBtn">Përditëso</button>
+                    </div>
+                    <table id="matrixTable">
+                        <!-- Tabela me inpute për matricën e fqinjësisë popullohet nga JavaScript -->
+                    </table>
+                    <div class="button-group">
+                        <button id="generateGraphBtn">Gjenero Grafin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup për Graf nga Matrica e Incidencës -->
+        <div id="incidenceInputPopup" class="graphViz-popup" style="display: none;">
+            <button class="close-btn">×</button>
+            <h3>Krijo Graf nga Matrica e Incidencës</h3>
+            <div class="popup-content">
+                <div class="graph-container" id="incidenceGraphPreview"></div>
+                <div class="matrix-container">
+                    <div class="matrix-controls">
+                        <label for="nodeCount">Numri i nyjeve:</label>
+                        <input type="number" id="nodeCount" min="1" max="26" value="5">
+                        <label for="edgeCount">Numri i lidhjeve:</label>
+                        <input type="number" id="edgeCount" min="1" value="5">
+                        <button id="updateIncidenceSizeBtn">Përditëso</button>
+                    </div>
+                    <table id="incidenceTable">
+                        <!-- Tabela me inpute për matricën e incidencës popullohet nga JavaScript -->
+                    </table>
+                    <div class="button-group">
+                        <button id="generateIncidenceGraphBtn">Gjenero Grafin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialogflow Messenger -->
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+          intent="WELCOME"
+          chat-title="Asistenti Virtual"
+          agent-id="7fbb1445-95ec-47be-8305-1b4402f59bb5"
+          chat-icon="robot.png"
+          language-code="sq"
+        ></df-messenger>
+        <style>
+          df-messenger {
+            --df-messenger-button-titlebar-color: #2B7CE9; /* Ngjyra e titullit */
+            --df-messenger-chat-background-color: #f4f4f4; /* Sfoni i bisedës */
+            --df-messenger-user-message-background: #2B7CE9; /* Ngjyra e mesazheve të përdoruesit */
+            --df-messenger-bot-message-background: #ffffff; /* Ngjyra e mesazheve të bot-it */
+            z-index: 1000; /* Siguron që widget-i shfaqet mbi elementet e tjera */
+            right: 20px; /* Pozicioni djathtas */
+            bottom: 20px; /* Pozicioni poshtë */
+          }
+        </style>
+
+        <!-- Skriptet ekzistuese -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/graphViz.js"></script>
+        <script src="assets/js/canvasbg.js"></script>
+        
+        <script>
+            $(document).ready(function() {
+                $('.tab-btn').click(function() {
+                    $('.tab-btn').removeClass('active');
+                    $(this).addClass('active');
+                    
+                    $('.toolbar-content').removeClass('active');
+                    var tabId = $(this).data('tab');
+                    $('#' + tabId).addClass('active');
+                });
+
+                $('.color-btn').click(function() {
+                    var colorInputId = $(this).data('color-input');
+                    $('#' + colorInputId).click();
+                });
+            });
+        </script>
+    </body>
+</html>
